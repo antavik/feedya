@@ -35,7 +35,7 @@ def _get_feeds_data(feeds: Tuple[FeedEntity]) -> Tuple[FeedEntity]:
         for future in as_completed(futures, timeout=THREAD_TIMEOUT):
             future.result()
 
-        logging.info('Feeds were got.')
+        logging.info('Feeds were received.')
 
         return feeds
 
