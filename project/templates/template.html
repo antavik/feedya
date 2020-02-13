@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Feed // {{email_title}}</title>
+    <style type="text/css">
+      body {
+        font-family: serif
+      }
+      table {
+        border: 0px;
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+      }
+      tr {
+        border-bottom: 10px solid #ffffff
+      }
+      td {
+        vertical-align: top;
+        border-right: 15px solid #ffffff;
+      }
+      .common {
+        width: 900px;
+        margin: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .title-border {
+        text-align: center;
+        background: #fff3b0;
+        color: #5d93de;
+      }
+      .title-text {
+        font-weight: bold;
+        font-size: 24px;
+      }
+      .title-date {
+        font-style: italic;
+        font-size: 14px;
+      }
+      .news-border {
+        background: #ffffff;
+      }
+      .feed-title {
+        font-weight: bold;
+        font-size: 20px;
+        padding-top: 9px;
+        padding-bottom: 6px;
+        text-align: center;
+      }
+      .news-title {
+        font-weight: bold;
+        font-size: 15px;
+        padding-bottom: 3px;
+      }
+      .news-link {
+        color: #000000;
+      }
+      .news-description {
+        font-size: 14px;
+        margin-top: 1px;
+        margin-bottom: 1px;
+      }
+      .news-meta {
+        text-align:left;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        margin-right: 5px;
+      }
+      .news-pub-date {
+        font-style: italic;
+        font-size: 14px;
+        color: #797684;
+      }
+    </style>
+  </head>
+  <body bgcolor="#e3e3e3">
+    <div class="common title-border">
+      <div class="title-text">Feed</div>
+      <div class="title-date">{{email_date}}</div>
+    </div>
+    <div class="common news-border">
+      {%- for feed in feeds %}
+      <div class="feed-title">{{ feed.title }}</div>
+      {%- if feed.news %}
+      <table cols="3">
+        <tbody>
+          {%- for news_line in feed.news|batch(3) %}
+          <tr>
+            {%- for news in news_line %}
+            <td>
+              <div class="news-title"><a class="news-link" href="{{ news.url }}">{{ news.title }}</a></div>
+              <p class="news-description">{{ news.description }}</p>
+              <p class="news-meta">
+                <span class="news-pub-date">{{ news.pub_date_str }}</span>
+              </p>
+            </td>
+            {%- endfor %}
+          </tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+      {%- else %}
+      <p class="news-description">Feed is empty</p>
+      {%- endif %}
+      {%- endfor %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+class NewsAlreadyExists(Exception):
+    pass
