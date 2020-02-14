@@ -13,11 +13,12 @@ def _repair_rss_xml(raw_xml: str) -> str:
     replace_table = {
         '&#x3C;': '<',
         '&#x3E;': '>',
+        '&#039;': '\'',
+        '&amp;': '&',
     }
 
     for invalid, replacment in replace_table.items():
         raw_xml = raw_xml.replace(invalid, replacment)
-
     return raw_xml
 
 
@@ -34,7 +35,7 @@ def parse_rss_xml_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
          'url': 'id',
          },
     )
-
+    # print(feed.raw_data)
     soup = BeautifulSoup(_repair_rss_xml(feed.raw_data), 'xml')
 
     for configuration in _rss_configurations:
@@ -42,10 +43,15 @@ def parse_rss_xml_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
             for item in body.findChildren(configuration['item']):
                 title = item.title.text.strip()
                 url = item.find(configuration['url']).text
+
                 publication_date = dp(
                     item.find(configuration['pub_date']).text, fuzzy=True
                 )
-                description = item.description.text.strip() if item.description else ''
+
+                if not feed.data.get('ignore_descriptions'):
+                    description = item.description.text.strip() if item.description else ''
+                else:
+                    description = ''
 
                 yield NewsItemEntity(
                     title=title,

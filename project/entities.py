@@ -11,7 +11,7 @@ class NewsItemEntity:
     feed: str
     publication_date: datetime
     collection_date: datetime
-    data: Dict[str, str] = field(default_factory=dict)
+    data: Dict = field(default_factory=dict)
     pk: Optional[int] = None
     late: Optional[bool] = None
 
@@ -40,7 +40,7 @@ class FeedEntity:
     feed_type: str
     title: str
     url: str
-    data: Optional[Dict] = None
+    data: Dict = field(default_factory=dict)
     raw_data: Optional[str] = None
     collection_date: Optional[datetime] = None
     news: List[NewsItemEntity] = field(default_factory=list)
