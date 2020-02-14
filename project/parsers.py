@@ -35,7 +35,7 @@ def parse_rss_xml_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
          'url': 'id',
          },
     )
-    # print(feed.raw_data)
+
     soup = BeautifulSoup(_repair_rss_xml(feed.raw_data), 'xml')
 
     for configuration in _rss_configurations:
