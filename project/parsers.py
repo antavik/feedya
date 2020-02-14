@@ -19,6 +19,7 @@ def _repair_rss_xml(raw_xml: str) -> str:
 
     for invalid, replacment in replace_table.items():
         raw_xml = raw_xml.replace(invalid, replacment)
+
     return raw_xml
 
 
