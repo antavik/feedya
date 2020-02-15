@@ -2,7 +2,7 @@ from entities import FeedEntity as FE
 
 
 FEEDS = (
-    FE('rss', 'The Verge', 'https://www.theverge.com/rss/index.xml', data={'ignore_description': True}),
+    FE('rss', 'The Verge', 'https://www.theverge.com/rss/index.xml'),
     FE('rss', 'Wired', 'https://www.wired.com/feed/rss'),
     FE('rss', 'VB', 'https://feeds.feedburner.com/venturebeat/SZYF'),
     FE('rss', 'TechCrunch', 'http://feeds.feedburner.com/TechCrunch/'),
