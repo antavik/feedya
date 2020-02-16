@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Feed // {{email_title}}</title>
+    <title>Feed // {{ feed_datetime.strftime('%d %b %Y') }}</title>
     <style type="text/css">
       body {
         font-family: serif
@@ -31,11 +31,11 @@
       .title-border {
         text-align: center;
         background: #fff3b0;
-        color: #5d93de;
+        color: #3574cc;
       }
       .title-text {
         font-weight: bold;
-        font-size: 24px;
+        font-size: 30px;
       }
       .title-date {
         font-style: italic;
@@ -53,8 +53,8 @@
       }
       .news-title {
         font-weight: bold;
-        font-size: 15px;
-        padding-bottom: 3px;
+        font-size: 17px;
+        padding-bottom: 4px;
       }
       .news-link {
         color: #000000;
@@ -72,15 +72,26 @@
       }
       .news-pub-date {
         font-style: italic;
-        font-size: 14px;
+        font-size: 13px;
         color: #797684;
+      }
+      .footer {
+        font-size: 16px;
+        font-style: italic;
+        text-align: center;
+        color: #606060;
+      }
+      .footer-logo {
+        font-size: 12px;
+        font-style: normal;
+        text-align: center;
       }
     </style>
   </head>
   <body bgcolor="#e3e3e3">
     <div class="common title-border">
       <div class="title-text">Feed</div>
-      <div class="title-date">{{email_date}}</div>
+      <div class="title-date">{{ feed_datetime.strftime('%d %B %Y, %a') }}</div>
     </div>
     <div class="common news-border">
       {%- for feed in feeds %}
@@ -108,5 +119,11 @@
       {%- endif %}
       {%- endfor %}
     </div>
+    {%- if feed_datetime.hour > 7 %}
+    <p class="footer">Have a great day!</p>
+    {%- elif feed_datetime.hour > 19 %}
+    <p class="footer">Good night!</p>
+    {%- endif %}
+    <p class="footer footer-logo">Feedya ©</p>
   </body>
 </html>

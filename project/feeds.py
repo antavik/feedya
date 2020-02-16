@@ -13,7 +13,6 @@ FEEDS = (
     FE('rss', 'WSJ Tech', 'https://feeds.a.dj.com/rss/RSSWSJD.xml'),
     FE('rss', 'BBC Science & Environment', 'http://feeds.bbci.co.uk/news/science_and_environment/rss.xml'),
     FE('rss', 'dev.by', 'https://dev.by/rss'),
-    FE('rss', 'REPUBLIC', 'https://republic.ru/export/all.xml'),
     FE('rss', 'NYT Home Page', 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml'),
     FE('rss', 'python PEP', 'https://www.python.org/dev/peps/peps.rss'),
     FE('rss', 'tut.by', 'https://news.tut.by/rss/index.rss'),

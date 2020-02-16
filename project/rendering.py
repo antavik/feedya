@@ -22,12 +22,8 @@ def _get_html_template() -> Template:
 def render_html_email(feeds: Tuple[FeedEntity]) -> str:
     template = _get_html_template()
 
-    short_email_date = TODAY_DATETIME.strftime('%d %b %Y')
-    full_email_date = TODAY_DATETIME.strftime('%d %B %Y, %a')
-
     email = template.render(
-        email_title=short_email_date,
-        email_date=full_email_date,
+        feed_datetime=TODAY_DATETIME,
         feeds=FEEDS
     )
 
