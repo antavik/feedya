@@ -31,7 +31,7 @@ THREAD_TIMEOUT = 20
 TEMPLATES_DIR = './templates'
 TEMPLATE_NAME = 'template.html'
 
-TODAY_DATETIME = datetime.datetime.now().date()
+TODAY_DATETIME = datetime.datetime.now()
 
 MAX_LATE_NEWS = 3
 
