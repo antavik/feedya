@@ -30,8 +30,8 @@
       }
       .title-border {
         text-align: center;
-        background: #fff3b0;
-        color: #3574cc;
+        background: {{ title_bg_color }};
+        color: {{ title_font_color }};
       }
       .title-text {
         font-weight: bold;
@@ -124,6 +124,6 @@
     {%- elif feed_datetime.hour > 19 %}
     <p class="footer">Good night!</p>
     {%- endif %}
-    <p class="footer footer-logo">Feedya ©</p>
+    <p class="footer footer-logo">© {{ feed_datetime.year }} Feedya </p>
   </body>
 </html>
