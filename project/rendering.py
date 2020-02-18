@@ -18,11 +18,12 @@ def color_randomizer() -> Tuple[str]:
         ('#b6ff1c', '#651cff',),
         ('#19f76d', '#f719a3',),
         ('#aec575', '#8c75c5',),
-        ('#8dcf83', '#c583cf',),
-        ('#6dd81b', '#861bd8',),
+        ('#8dcf83', '#a759b3',),
+        ('#6dd81b', '#9d3ee5',),
         ('#96ca98', '#ca96c8',),
-        ('#2a7e6c', '#7e2a3c',),
+        ('#2a7e6c', '#dd2e53',),
         ('#42e4e7', '#e74542',),
+        ('#bed0ff', '#83785b',),
     )
 
     return choice(_support_color_pairs)
