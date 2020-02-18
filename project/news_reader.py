@@ -45,7 +45,7 @@ def _parse_feeds_data(feeds: Tuple[FeedEntity]) -> Tuple[FeedEntity]:
         if feed.raw_data:
             try:
                 feed.news = [n for n in _parse_raw_data(feed)]
-            except KeyError as exp:
+            except Exception as exp:
                 logging.error('%s cannot be parsed: %s.', feed, exp)
         else:
             logging.warning('%s is empty.', feed)
