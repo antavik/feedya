@@ -21,7 +21,7 @@
         border-right: 15px solid #ffffff;
       }
       .common {
-        width: 900px;
+        width: 1000px;
         margin: auto;
         padding-top: 10px;
         padding-bottom: 10px;
@@ -39,28 +39,29 @@
       }
       .title-date {
         font-style: italic;
-        font-size: 14px;
+        font-weight: bold;
+        font-size: 16px;
       }
       .news-border {
         background: #ffffff;
       }
       .feed-title {
         font-weight: bold;
-        font-size: 20px;
+        font-size: 23px;
         padding-top: 9px;
         padding-bottom: 6px;
         text-align: center;
       }
       .news-title {
         font-weight: bold;
-        font-size: 17px;
+        font-size: 18px;
         padding-bottom: 4px;
       }
       .news-link {
         color: #000000;
       }
       .news-description {
-        font-size: 14px;
+        font-size: 15px;
         margin-top: 1px;
         margin-bottom: 1px;
       }
@@ -119,11 +120,11 @@
       {%- endif %}
       {%- endfor %}
     </div>
-    {%- if feed_datetime.hour > 7 %}
-    <p class="footer">Have a great day!</p>
-    {%- elif feed_datetime.hour > 19 %}
+    {%- if feed_datetime.hour >= 19 %}
     <p class="footer">Good night!</p>
+    {%- else %}
+    <p class="footer">Have a great day!</p>
     {%- endif %}
-    <p class="footer footer-logo">© {{ feed_datetime.year }} Feedya </p>
+    <p class="footer footer-logo">© {{ feed_datetime.year }} Feedya</p>
   </body>
 </html>
