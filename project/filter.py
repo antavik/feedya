@@ -9,6 +9,11 @@ from entities import NewsItemEntity, FeedEntity
 from exceptions import NewsAlreadyExists
 
 
+def _block_ab(news: NewsItemEntity) -> bool:
+
+    return 'реклама' in news.description
+
+
 def _mark_late_news(news: NewsItemEntity) -> NewsItemEntity:
     try:
         news = create_news(news)
@@ -28,7 +33,7 @@ def _process_news(feeds: Tuple[FeedEntity]) -> Tuple[FeedEntity]:
     with TPE(max_workers=THREADS_QUANTITY) as executor:
         futures = tuple(
             executor.submit(_mark_late_news, n)
-            for f in feeds for n in f.news
+            for f in feeds for n in f.news if not _block_ad(n)
         )
 
         for future in as_completed(futures, timeout=THREAD_TIMEOUT):
