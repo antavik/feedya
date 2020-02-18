@@ -28,8 +28,8 @@ def parse_rss_xml_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
     for configuration in _rss_configurations:
         if body := soup.find(configuration['body']):
             for item in body.findChildren(configuration['item']):
-                title = item.title.text.strip()
                 url = item.find(configuration['url']).text.strip()
+                title = item.title.text.strip() if item.title else url
 
                 publication_date = dp(
                     item.find(configuration['pub_date']).text, fuzzy=True
