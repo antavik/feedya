@@ -9,7 +9,7 @@ from entities import NewsItemEntity, FeedEntity
 from exceptions import NewsAlreadyExists
 
 
-def _block_ab(news: NewsItemEntity) -> bool:
+def _block_ad(news: NewsItemEntity) -> bool:
 
     return 'реклама' in news.description
 

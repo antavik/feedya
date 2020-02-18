@@ -1,6 +1,6 @@
 from tests.factories import NewsItemEntityFactory
 
-from filter import _mark_late_news, _count_late_news, _block_ab
+from filter import _mark_late_news, _count_late_news, _block_ad
 from exceptions import NewsAlreadyExists
 
 
@@ -53,9 +53,9 @@ class TestFilter:
     def test_block_ad__valid_news__false(self):
         entity = NewsItemEntityFactory()
 
-        assert not _block_ab(entity)
+        assert not _block_ad(entity)
 
     def test_block_ad__news_with_ad__true(self):
         entity = NewsItemEntityFactory(description='реклама')
 
-        assert _block_ab(entity)
+        assert _block_ad(entity)
