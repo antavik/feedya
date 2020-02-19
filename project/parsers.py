@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from lxml import html
 
 from entities import FeedEntity, NewsItemEntity
+from utils import block_ad
 
 
 def parse_rss_xml_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
@@ -41,6 +42,9 @@ def parse_rss_xml_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
                     description = description_soap.text
                 else:
                     description = ''
+
+                if block_ad(description):
+                    continue
 
                 yield NewsItemEntity(
                     title=title,
