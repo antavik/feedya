@@ -1,6 +1,6 @@
 from tests.factories import NewsItemEntityFactory
 
-from filter import _mark_late_news, _count_late_news, _block_ad
+from filter import _mark_late_news
 from exceptions import NewsAlreadyExists
 
 
