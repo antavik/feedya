@@ -25,37 +25,3 @@ class TestFilter:
         marked_entity = _mark_late_news(entity)
 
         assert marked_entity.late
-
-    def test_count_late_news__late_news_list__int(self):
-        news_list = tuple(NewsItemEntityFactory(late=True) for _ in range(3))
-
-        lenth = _count_late_news(news_list)
-
-        assert lenth
-        assert isinstance(lenth, int)
-
-    def test_count_late_news__no_late_news_list__int(self):
-        news_list = tuple(NewsItemEntityFactory() for _ in range(3))
-
-        lenth = _count_late_news(news_list)
-
-        assert not lenth
-        assert isinstance(lenth, int)
-
-    def test_count_late_news__empty_list__int(self):
-        news_list = tuple()
-
-        lenth = _count_late_news(news_list)
-
-        assert not lenth
-        assert isinstance(lenth, int)
-
-    def test_block_ad__valid_news__false(self):
-        entity = NewsItemEntityFactory()
-
-        assert not _block_ad(entity)
-
-    def test_block_ad__news_with_ad__true(self):
-        entity = NewsItemEntityFactory(description='реклама')
-
-        assert _block_ad(entity)
