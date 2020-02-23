@@ -61,7 +61,7 @@ def parse_rss_xml_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
 
 
 def parse_hn_html_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
-    max_news = 15
+    max_news = feed.data['max_news']
 
     _title_xpath = '/html/body/center/table//tr[3]/td/table//tr[@class="athing"]/td[3]/a'
     _description_xpath = '/html/body/center/table//tr[3]/td/table//tr[not(@class) and position()<last()]/td[2]'
