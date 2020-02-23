@@ -1,12 +1,11 @@
 from datetime import datetime
 from dataclasses import dataclass, field
-from typing import Union, Optional, Dict, List
+from typing import Optional, Dict, List
 
 
 @dataclass(repr=False)
 class NewsItemEntity:
     title: str
-    description: str
     url: str
     feed: str
     publication_date: datetime
@@ -14,6 +13,7 @@ class NewsItemEntity:
     data: Dict = field(default_factory=dict)
     pk: Optional[int] = None
     late: Optional[bool] = None
+    description: Optional[str] = None
 
     @property
     def pub_date_str(self):

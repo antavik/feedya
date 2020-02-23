@@ -58,3 +58,35 @@ def parse_rss_xml_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
             break
         else:
             continue
+
+
+def parse_hn_html_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
+    max_news = feed.data['max_news']
+
+    _title_xpath = '/html/body/center/table//tr[3]/td/table//tr[@class="athing"]/td[3]/a'
+    _description_xpath = '/html/body/center/table//tr[3]/td/table//tr[not(@class) and position()<last()]/td[2]'
+    _relative_points_xpath = 'span[1]/text()'
+    _relative_thread_link_xpath = 'a[3]/@href'
+    _relative_comments_xpath = 'a[3]/text()'
+
+    html_page = html.fromstring(feed.raw_data)
+
+    titles = html_page.xpath(_title_xpath)
+    descriptions = html_page.xpath(_description_xpath)
+
+    for title, description in zip(titles[:max_news], descriptions[:max_news]):
+        points = description.xpath(_relative_points_xpath)[0]
+        thread_id = description.xpath(_relative_thread_link_xpath)[0]
+        comments = description.xpath(_relative_comments_xpath)[0]
+
+        yield NewsItemEntity(
+            title=title.text,
+            url=title.attrib['href'],
+            feed=feed.title,
+            publication_date=feed.collection_date,
+            collection_date=feed.collection_date,
+            data={
+                'url': f'https://news.ycombinator.com/{thread_id}',
+                'url_comment': f'{points}, {comments}',
+            }
+        )
