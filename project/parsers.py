@@ -1,5 +1,4 @@
 import logging
-import datetime
 
 from typing import Iterator
 from dateutil.parser import parse as dp
