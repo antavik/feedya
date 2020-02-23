@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from typing import Callable, Iterator
 
 from collectors import get_feed
-from parsers import parse_rss_xml_document
+from parsers import parse_rss_xml_document, parse_hn_html_document
 from entities import NewsItemEntity, FeedEntity
 
 
@@ -44,4 +44,5 @@ class CollectorConfiguration:
 
 COLLECTOR_CONFIGURATION = {
     'rss': CollectorConfiguration(get_feed, parse_rss_xml_document),
+    'hn_html': CollectorConfiguration(get_feed, parse_hn_html_document)
 }

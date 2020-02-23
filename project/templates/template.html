@@ -105,7 +105,14 @@
             {%- for news in news_line %}
             <td>
               <div class="news-title"><a class="news-link" href="{{ news.url }}">{{ news.title }}</a></div>
-              <p class="news-description">{{ news.description }}</p>
+              <p class="news-description">
+                {%- if news.description is not none %}
+                  {{ news.description }}
+                {%- endif %}
+                {%- if news.data.get('url') is not none %}
+                  <a href="{{ news.data['url'] }}">{{ news.data['url_comment'] }}</a>
+                {%- endif %}
+              </p>
               <p class="news-meta">
                 <span class="news-pub-date">{{ news.pub_date_str }}</span>
               </p>
@@ -120,7 +127,7 @@
       {%- endif %}
       {%- endfor %}
     </div>
-    {%- if feed_datetime.hour >= 19 %}
+    {%- if feed_datetime.hour >= 17 %}
     <p class="footer">Good night!</p>
     {%- else %}
     <p class="footer">Have a great day!</p>

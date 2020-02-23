@@ -8,7 +8,6 @@ from jinja2.environment import Template
 
 from settings import TEMPLATES_DIR, TEMPLATE_NAME, TODAY_DATETIME
 from entities import FeedEntity
-from feeds import FEEDS
 
 
 def color_randomizer() -> Tuple[str]:
@@ -47,7 +46,7 @@ def render_html_email(feeds: Tuple[FeedEntity]) -> str:
         title_bg_color=title_bg_color,
         title_font_color=title_font_color,
         feed_datetime=TODAY_DATETIME,
-        feeds=FEEDS
+        feeds=feeds
     )
 
     logging.info('Email feed was prepared.')
