@@ -75,9 +75,9 @@ def parse_hn_html_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
     descriptions = html_page.xpath(_description_xpath)
 
     for title, description in zip(titles[:max_news], descriptions[:max_news]):
-        points = description.xpath(_relative_points_xpath)[0]
         thread_id = description.xpath(_relative_thread_link_xpath)[0]
-        comments = description.xpath(_relative_comments_xpath)[0]
+        points = description.xpath(_relative_points_xpath)
+        comments = description.xpath(_relative_comments_xpath)
 
         yield NewsItemEntity(
             title=title.text,
@@ -87,6 +87,7 @@ def parse_hn_html_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
             collection_date=feed.collection_date,
             data={
                 'url': f'https://news.ycombinator.com/{thread_id}',
-                'url_comment': f'{points}, {comments}',
+                'url_comment': (f'{points[0] if points else '0 points'}, '
+                                f'{comments[0] if comments else 'No comments'}'),
             }
         )
