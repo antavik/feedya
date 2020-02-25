@@ -87,7 +87,7 @@ def parse_hn_html_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
             collection_date=feed.collection_date,
             data={
                 'url': f'https://news.ycombinator.com/{thread_id}',
-                'url_comment': (f'{points[0] if points else '0 points'}, '
-                                f'{comments[0] if comments else 'No comments'}'),
+                'url_comment': (f'{points[0] if points else "0 points"}, '
+                                f'{comments[0] if comments else "No comments"}'),
             }
         )
