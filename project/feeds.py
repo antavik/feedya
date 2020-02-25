@@ -8,7 +8,7 @@ FEEDS = (
     FE('rss', 'TechCrunch', 'http://feeds.feedburner.com/TechCrunch/'),
     FE('rss', 'TNW', 'https://thenextweb.com/feed/'),
     FE('rss', 'addmeto (telegram)', 'https://addmeto.cc/rss/'),
-    FE('hn_html', 'Hacker News', 'https://news.ycombinator.com/', data={'max_news': 15}),
+    FE('hn_html', 'Hacker News', 'https://news.ycombinator.com/', data={'max_news': 20}),
     FE('rss', 'BBC Tech', 'http://feeds.bbci.co.uk/news/technology/rss.xml'),
     FE('rss', 'NYT Tech', 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml'),
     FE('rss', 'Engadged', 'https://www.engadget.com/rss.xml'),
