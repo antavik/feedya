@@ -7,6 +7,6 @@ POSTGRES="psql --username postgres"
 
 # create database for superset
 echo "Creating database: $DB_NAME"
-$POSTGRES << EOSQL
+$POSTGRES <<EOSQL
 CREATE DATABASE $DB_NAME OWNER $OWNER;
 EOSQL

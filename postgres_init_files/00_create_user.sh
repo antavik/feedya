@@ -6,13 +6,13 @@ POSTGRES="psql --username postgres"
 
 # create a shared role to read & write general datasets into postgres
 echo "Creating database role: feedya"
-$POSTGRES << EOSQL
+$POSTGRES <<-EOSQL
 CREATE USER $USER WITH
-    LOGIN
-    NOSUPERUSER
-    NOCREATEDB
-    NOCREATEROLE
-    NOINHERIT
-    NOREPLICATION
-    PASSWORD '$POSTGRES_PASSWORD';
+	LOGIN
+	NOSUPERUSER
+	NOCREATEDB
+	NOCREATEROLE
+	NOINHERIT
+	NOREPLICATION
+	PASSWORD '$POSTGRES_PASSWORD';
 EOSQL
