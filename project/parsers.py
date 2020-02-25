@@ -63,11 +63,11 @@ def parse_rss_xml_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
 def parse_hn_html_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
     max_news = feed.data['max_news']
 
-    _title_xpath = '/html/body/center/table//tr[3]/td/table//tr[@class="athing"]/td[3]/a'
-    _description_xpath = '/html/body/center/table//tr[3]/td/table//tr[not(@class) and position()<last()]/td[2]'
-    _relative_points_xpath = 'span[1]/text()'
-    _relative_thread_link_xpath = 'a[3]/@href'
-    _relative_comments_xpath = 'a[3]/text()'
+    _title_xpath = '//table//tr[3]/td/table//tr[td[@class="votelinks"]]/td[3]/a'
+    _description_xpath = '//table//tr[3]/td/table//tr/td[span[@class="score"] and a[last() and @href]]'
+    _relative_points_xpath = 'span[@class="score"]/text()'
+    _relative_thread_link_xpath = 'a[last()]/@href'
+    _relative_comments_xpath = 'a[last()]/text()'
 
     html_page = html.fromstring(feed.raw_data)
 
@@ -76,8 +76,8 @@ def parse_hn_html_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
 
     for title, description in zip(titles[:max_news], descriptions[:max_news]):
         thread_id = description.xpath(_relative_thread_link_xpath)[0]
-        points = description.xpath(_relative_points_xpath)
-        comments = description.xpath(_relative_comments_xpath)
+        points = description.xpath(_relative_points_xpath)[0]
+        comments = description.xpath(_relative_comments_xpath)[0]
 
         yield NewsItemEntity(
             title=title.text,
@@ -87,7 +87,6 @@ def parse_hn_html_document(feed: FeedEntity) -> Iterator[NewsItemEntity]:
             collection_date=feed.collection_date,
             data={
                 'url': f'https://news.ycombinator.com/{thread_id}',
-                'url_comment': (f'{points[0] if points else "0 points"}, '
-                                f'{comments[0] if comments else "No comments"}'),
+                'url_comment': f'{points}, {comments}',
             }
         )
