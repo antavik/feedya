@@ -1,17 +1,17 @@
 import logging
 import datetime
 
+import parsers
+
 from typing import Iterator, Tuple
 from concurrent.futures import ThreadPoolExecutor as TPE, as_completed
 
-from settings import THREADS_QUANTITY, THREAD_TIMEOUT, COLLECTOR_CONFIGURATION
+from settings import THREADS_QUANTITY, THREAD_TIMEOUT
 from entities import FeedEntity, NewsItemEntity
+from collectors import get_feed
 
 
 def _get_feed_raw_data(feed: FeedEntity) -> FeedEntity:
-
-    get_feed = COLLECTOR_CONFIGURATION[feed.feed_type].collector
-
     feed.raw_data = get_feed(feed)
     feed.collection_date = datetime.datetime.now()
 
@@ -19,8 +19,7 @@ def _get_feed_raw_data(feed: FeedEntity) -> FeedEntity:
 
 
 def _parse_raw_data(feed: FeedEntity) -> Iterator[NewsItemEntity]:
-
-    parse = COLLECTOR_CONFIGURATION[feed.feed_type].parser
+    parse = parsers.REGISTRIES[feed.feed_type]
 
     return parse(feed)
 
@@ -53,6 +52,6 @@ def _parse_feeds_data(feeds: Tuple[FeedEntity]) -> Tuple[FeedEntity]:
     return feeds
 
 
-def get_news(feeds) -> Tuple[FeedEntity]:
+def get_news(feeds: Tuple[FeedEntity]) -> Tuple[FeedEntity]:
 
     return _parse_feeds_data(_get_feeds_data(feeds))

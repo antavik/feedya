@@ -1,14 +1,6 @@
 import os
 import datetime
 
-from dataclasses import dataclass
-from typing import Callable, Iterator
-
-from collectors import get_feed
-from parsers import parse_rss_xml_document, parse_hn_html_document
-from entities import NewsItemEntity, FeedEntity
-
-
 DB_URL = os.getenv('DATABASE_URL')
 
 if DB_URL is None:
@@ -34,15 +26,3 @@ TEMPLATE_NAME = 'template.html'
 TODAY_DATETIME = datetime.datetime.now()
 
 MAX_LATE_NEWS = 3
-
-
-@dataclass
-class CollectorConfiguration:
-    collector: Callable[[FeedEntity], FeedEntity]
-    parser: Callable[[FeedEntity], Iterator[NewsItemEntity]]
-
-
-COLLECTOR_CONFIGURATION = {
-    'rss': CollectorConfiguration(get_feed, parse_rss_xml_document),
-    'hn_html': CollectorConfiguration(get_feed, parse_hn_html_document)
-}
