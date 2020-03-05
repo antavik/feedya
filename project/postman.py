@@ -5,17 +5,18 @@ import logging
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-from settings import (SMPT_SERVER,
-                      SMPT_SSL_PORT,
-                      SENDER_EMAIL,
-                      SENDER_EMAIL_PASSWORD,
-                      RECEIVER_EMAIL,
-                      TODAY_DATETIME,
-                      )
+from settings import (
+    SMPT_SERVER,
+    SMPT_SSL_PORT,
+    SENDER_EMAIL,
+    SENDER_EMAIL_PASSWORD,
+    RECEIVER_EMAIL, TODAY_DATETIME,
+)
 
 
 def _prepare_email(email: str) -> MIMEMultipart:
     message = MIMEMultipart()
+
     message['Subject'] = f'Feed // {TODAY_DATETIME.strftime("%d-%b-%Y")}'
     message['From'] = SENDER_EMAIL
     message['To'] = RECEIVER_EMAIL

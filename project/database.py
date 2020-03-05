@@ -1,6 +1,8 @@
-import logging
 import contextlib
 import json
+import logging
+
+import settings
 
 from sqlalchemy import (
     create_engine, Table, Column, Integer, String, DateTime, MetaData,
@@ -8,12 +10,11 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.exc import IntegrityError
 
-from settings import DB_URL
 from entities import NewsItemEntity
 from exceptions import NewsAlreadyExists
 
 
-_ENGINE = create_engine(DB_URL)
+_ENGINE = create_engine(settings.DB_URL)
 
 _METADATA = MetaData()
 
