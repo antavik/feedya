@@ -1,0 +1,20 @@
+version: '3'
+services:
+
+  feedya:
+    image: feedya-news-dev
+    build:
+      context: .
+      args:
+        requirements: test.txt
+    command: pytest tests
+    volumes:
+      - ./project:/app
+    environment:
+      - DB_USERNAME=feedya-test-db
+      - DB_PASSWORD=test-db-password
+      - DB_SERVER=test-server
+      - DB_DATABASE=test-db
+      - SENDER_EMAIL=test@mail.test
+      - SENDER_EMAIL_PASSWORD=test-email-pass
+      - RECEIVER_EMAIL=test-receiver@mail.test
