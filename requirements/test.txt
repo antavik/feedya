@@ -1,0 +1,5 @@
+-r common.txt
+
+pytest==5.3.5
+pytest-mock==2.0.0
+pytest-factoryboy==2.0.3
