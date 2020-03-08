@@ -3,10 +3,11 @@ from entities import FeedEntity as FE
 
 FEEDS = (
     FE('rss', 'The Verge', 'https://www.theverge.com/rss/index.xml'),
-    FE('rss', 'Wired', 'https://www.wired.com/feed/rss'),
     FE('rss', 'VB', 'https://feeds.feedburner.com/venturebeat/SZYF'),
     FE('rss', 'TNW', 'https://thenextweb.com/feed/'),
     FE('rss', 'ARS Technica', 'http://feeds.arstechnica.com/arstechnica/index'),
+    FE('rss', 'Wired', 'https://www.wired.com/feed/rss'),
+    FE('rss', 'The Atlantic', 'https://www.theatlantic.com/feed/all/.rss'),
     FE('rss', 'TechCrunch', 'http://feeds.feedburner.com/TechCrunch/'),
     FE('rss', 'addmeto (telegram)', 'https://addmeto.cc/rss/'),
     FE('hn', 'Hacker News', 'https://news.ycombinator.com/', data={'max_news': 20}),
@@ -19,5 +20,4 @@ FEEDS = (
     # FE('rss', 'NYT Home Page', 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml'),
     FE('rss', 'python PEP', 'https://www.python.org/dev/peps/peps.rss'),
     FE('rss', 'tut.by', 'https://news.tut.by/rss/index.rss'),
-    # FE('rss', 'The Atlantic', 'https://www.theatlantic.com/feed/all/.rss'),
 )
