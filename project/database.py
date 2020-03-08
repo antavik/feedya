@@ -30,8 +30,6 @@ news = Table(
     Column('data', JSONB)
 )
 
-_METADATA.create_all(_ENGINE)
-
 
 @contextlib.contextmanager
 def establish_connection():
@@ -58,10 +56,7 @@ def create_news(entity: NewsItemEntity) -> NewsItemEntity:
 
     with establish_connection() as connection:
         try:
-            result = connection.execute(
-                query
-            )
-
+            result = connection.execute(query)
             query.bind = _ENGINE
         except IntegrityError:
             raise NewsAlreadyExists(f'News {entity.url} already exists.')
@@ -69,3 +64,8 @@ def create_news(entity: NewsItemEntity) -> NewsItemEntity:
             entity.pk = result.inserted_primary_key
 
     return entity
+
+
+if __name__ == '__main__':
+
+    _METADATA.create_all(_ENGINE)
