@@ -6,7 +6,7 @@ from dateutil.parser import parse as dp
 from typing import Iterator
 
 from bs4 import BeautifulSoup
-from lxml import html
+from lxml import html, etree
 
 from entities import FeedEntity, NewsItemEntity
 from utils import block_ad
@@ -35,14 +35,14 @@ class RSS(Parser):
     def parse(feed):
         _rss_configurations = (
             {'body': 'channel',
-             'item': 'item',
+             'news': 'item',
              'pub_date': 'pubDate',
              'url': 'link',
              },
             {'body': 'feed',
-             'item': 'entry',
-             'pub_date': 'published',
-             'url': 'id',
+             'news': 'entry',
+             'pub_date': 'updated',
+             'url': 'link',
              },
         )
 
@@ -50,8 +50,10 @@ class RSS(Parser):
 
         for configuration in _rss_configurations:
             if body := soup.find(configuration['body']):
-                for item in body.findChildren(configuration['item']):
-                    url = item.find(configuration['url']).text.strip()
+                for item in body.findChildren(configuration['news']):
+                    if url := (item.find(configuration['url']).text or item.find(configuration['url'])['href']):
+                        url = url.strip()
+
                     title = item.title.text.strip() if item.title else url
 
                     publication_date = dp(
