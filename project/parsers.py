@@ -60,9 +60,9 @@ class RSS(Parser):
                         item.find(configuration['pub_date']).text, fuzzy=True
                     )
 
-                    if description_item := item.description:
+                    if item.description:
                         description_soap = BeautifulSoup(
-                            description_item.text, 'lxml'
+                            item.description.text, 'lxml'
                         )
                         description = description_soap.text
                     else:
