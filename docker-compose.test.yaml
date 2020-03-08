@@ -2,7 +2,7 @@ version: '3'
 services:
 
   feedya:
-    image: feedya-news-dev
+    image: feedya-news-test
     build:
       context: .
       args:

@@ -1,17 +1,18 @@
 import logging
 
+import database as db
+
 from typing import Tuple
 from concurrent.futures import ThreadPoolExecutor as TPE, as_completed
 
 from settings import THREADS_QUANTITY, THREAD_TIMEOUT
-from database import create_news
 from entities import NewsItemEntity, FeedEntity
 from exceptions import NewsAlreadyExists
 
 
 def _mark_late_news(news: NewsItemEntity) -> NewsItemEntity:
     try:
-        news = create_news(news)
+        news = db.create_news(news)
     except NewsAlreadyExists as exc:
         news.late = True
 

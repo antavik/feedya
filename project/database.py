@@ -1,6 +1,8 @@
-import logging
 import contextlib
 import json
+import logging
+
+import settings
 
 from sqlalchemy import (
     create_engine, Table, Column, Integer, String, DateTime, MetaData,
@@ -8,12 +10,11 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.exc import IntegrityError
 
-from settings import DB_URL
 from entities import NewsItemEntity
 from exceptions import NewsAlreadyExists
 
 
-_ENGINE = create_engine(DB_URL)
+_ENGINE = create_engine(settings.DB_URL)
 
 _METADATA = MetaData()
 
@@ -28,8 +29,6 @@ news = Table(
     Column('collection_date', DateTime, nullable=False),
     Column('data', JSONB)
 )
-
-_METADATA.create_all(_ENGINE)
 
 
 @contextlib.contextmanager
@@ -57,10 +56,7 @@ def create_news(entity: NewsItemEntity) -> NewsItemEntity:
 
     with establish_connection() as connection:
         try:
-            result = connection.execute(
-                query
-            )
-
+            result = connection.execute(query)
             query.bind = _ENGINE
         except IntegrityError:
             raise NewsAlreadyExists(f'News {entity.url} already exists.')
@@ -68,3 +64,8 @@ def create_news(entity: NewsItemEntity) -> NewsItemEntity:
             entity.pk = result.inserted_primary_key
 
     return entity
+
+
+if __name__ == '__main__':
+
+    _METADATA.create_all(_ENGINE)

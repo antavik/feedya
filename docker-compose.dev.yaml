@@ -37,7 +37,7 @@ services:
       - 5432:5432
 
   feedya:
-    image: feedya-news
+    image: feedya-news-dev
     build:
       context: .
       args:

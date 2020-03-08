@@ -35,7 +35,7 @@ class NewsItemEntity:
         )
 
 
-@dataclass
+@dataclass(repr=False)
 class FeedEntity:
     feed_type: str
     title: str
