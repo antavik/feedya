@@ -41,7 +41,7 @@ services:
     build:
       context: .
       args:
-        requirements: dev.txt
+        requirements: development.txt
     command: python main.py
     depends_on:
       - postgres
