@@ -3,7 +3,7 @@ services:
 
   postgres:
     image: postgres:12.1-alpine
-    restart: 'no'
+    restart: 'always'
     # Performance tuning by http://pgtune.leopard.in.ua
     # DB Version: 12
     # OS Type: linux
@@ -41,7 +41,7 @@ services:
     build:
       context: .
       args:
-        requirements: development.txt
+        requirements: dev.txt
     command: python main.py
     depends_on:
       - postgres

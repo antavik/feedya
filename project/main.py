@@ -6,11 +6,12 @@ from postman import send_email
 from feeds import FEEDS
 
 
-if __name__ == '__main__':
+def feed_reader():
     configure_logging()
-
     get_news(FEEDS)
-
     prepare_news(FEEDS)
-
     send_email(render_html_email(FEEDS))
+
+
+if __name__ == '__main__':
+    feed_reader()
