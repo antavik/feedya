@@ -18,6 +18,8 @@ _ENGINE = create_engine(settings.DB_URL)
 
 _METADATA = MetaData()
 
+_METADATA.create_all(_ENGINE)
+
 news = Table(
     'news',
     _METADATA,
@@ -64,8 +66,3 @@ def create_news(entity: NewsItemEntity) -> NewsItemEntity:
             entity.pk = result.inserted_primary_key
 
     return entity
-
-
-if __name__ == '__main__':
-
-    _METADATA.create_all(_ENGINE)
